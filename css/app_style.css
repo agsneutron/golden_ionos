@@ -1,0 +1,40 @@
+.profileImg{
+    border: 5px solid #37B7CF;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    height: 48px;
+}
+
+.inputError{
+    border: 1px solid #C60036;
+}
+
+.hr-line-solid-primary {
+    border-bottom: 1px solid #B04D25;
+    background-color: rgba(0, 0, 0, 0);
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.hr-line-dashed-primary {
+    border-bottom: 1px dashed #B04D25;
+    background-color: rgba(0, 0, 0, 0);
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+h1 .text-2x{
+    font-size: 60px;
+}
+h1 .text-3x{
+    font-size: 90px;
+}
+
+.input-error{
+    border: 1px solid #ed5565;
+    background-color: rgba(237, 85, 101, 10);
+    color: #FFFFFF
+}
+
+.input-success{
+    border: 1px solid #1ab394;
+}

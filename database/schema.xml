@@ -1,0 +1,692 @@
+<?xml version="1.0" encoding="utf-8"?>
+<database name="golden_clean" defaultIdMethod="native" defaultPhpNamingMethod="underscore">
+  <table name="branch_office_services" idMethod="native" phpName="BranchOfficeServices">
+    <column name="id" phpName="Id" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="id_branch_office" phpName="IdBranchOffice" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="id_service" phpName="IdService" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="normal_price" phpName="NormalPrice" type="DECIMAL" size="8" scale="2" required="true" defaultValue="0.00"/>
+    <column name="urgent_price" phpName="UrgentPrice" type="DECIMAL" size="8" scale="2" required="true" defaultValue="0.00"/>
+    <column name="extra_urgent_price" phpName="ExtraUrgentPrice" type="DECIMAL" size="8" scale="2" required="true" defaultValue="0.00"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP"/>
+    <foreign-key foreignTable="branch_offices" name="branch_office_services_id_branch_office_foreign" onUpdate="CASCADE">
+      <reference local="id_branch_office" foreign="id"/>
+    </foreign-key>
+    <foreign-key foreignTable="services" name="branch_office_services_id_service_foreign" onUpdate="CASCADE">
+      <reference local="id_service" foreign="id"/>
+    </foreign-key>
+    <index name="branch_office_services_id_branch_office_foreign">
+      <index-column name="id_branch_office"/>
+    </index>
+    <index name="branch_office_services_id_service_foreign">
+      <index-column name="id_service"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="branch_offices" idMethod="native" phpName="BranchOffices">
+    <column name="id" phpName="Id" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="name" phpName="Name" type="VARCHAR" size="191" required="true"/>
+    <column name="address" phpName="Address" type="VARCHAR" size="191" required="true"/>
+    <column name="phone" phpName="Phone" type="VARCHAR" size="191" required="true"/>
+    <column name="series" phpName="Series" type="VARCHAR" size="191" required="true"/>
+    <column name="current_sheet" phpName="CurrentSheet" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="rfc" phpName="Rfc" type="VARCHAR" size="191" required="true"/>
+    <column name="email" phpName="Email" type="VARCHAR" size="191" required="true"/>
+    <column name="legend" phpName="Legend" type="VARCHAR" size="191" required="true"/>
+    <column name="postal_code" phpName="PostalCode" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="calendar" idMethod="native" phpName="Calendar">
+    <column name="day" phpName="Day" type="DATE" primaryKey="true" required="true"/>
+    <column name="name" phpName="Name" type="VARCHAR" size="70" required="true"/>
+    <column name="year" phpName="Year" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="month" phpName="Month" type="VARCHAR" size="15" required="true"/>
+    <column name="month_number" phpName="MonthNumber" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="day_of_the_year" phpName="DayOfTheYear" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="weekday" phpName="Weekday" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="day_of_the_month" phpName="DayOfTheMonth" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="name_day" phpName="NameDay" type="VARCHAR" size="15" required="true"/>
+    <column name="short_name" phpName="ShortName" type="VARCHAR" size="15" required="true"/>
+    <column name="week" phpName="Week" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="bimester" phpName="Bimester" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="trimester" phpName="Trimester" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="semestre" phpName="Semestre" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="colors" idMethod="native" phpName="Colors">
+    <column name="id" phpName="Id" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="description" phpName="Description" type="VARCHAR" size="191" required="true"/>
+    <column name="code" phpName="Code" type="VARCHAR" size="191" required="true" defaultValue="0"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="defects" idMethod="native" phpName="Defects">
+    <column name="id" phpName="Id" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="description" phpName="Description" type="VARCHAR" size="191" required="true"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="deliveries" idMethod="native" phpName="Deliveries">
+    <column name="id" phpName="Id" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="id_order" phpName="IdOrder" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="id_assigned_user" phpName="IdAssignedUser" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="day_delivery" phpName="DayDelivery" type="DATE" required="true"/>
+    <column name="time_delivery" phpName="TimeDelivery" type="TIME"/>
+    <column name="real_delivery_date" phpName="RealDeliveryDate" type="DATE"/>
+    <column name="real_delivery_time" phpName="RealDeliveryTime" type="TIME"/>
+    <column name="status" phpName="Status" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true" defaultValue="0"/>
+    <column name="comments" phpName="Comments" type="VARCHAR" size="191" required="true" defaultValue=""/>
+    <column name="delivery_comments" phpName="DeliveryComments" type="VARCHAR" size="1000" required="true" defaultValue=""/>
+    <column name="delivery_contact_name" phpName="DeliveryContactName" type="VARCHAR" size="191" required="true" defaultValue=""/>
+    <column name="delivery_contact_signature" phpName="DeliveryContactSignature" type="LONGVARCHAR" required="true"/>
+    <column name="delivery_photo" phpName="DeliveryPhoto" type="LONGVARCHAR" required="true"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP"/>
+    <foreign-key foreignTable="calendar" name="deliveries_day_delivery_foreign" onUpdate="CASCADE">
+      <reference local="day_delivery" foreign="day"/>
+    </foreign-key>
+    <foreign-key foreignTable="users" name="deliveries_id_assigned_user_foreign" onUpdate="CASCADE">
+      <reference local="id_assigned_user" foreign="id"/>
+    </foreign-key>
+    <foreign-key foreignTable="orders" name="deliveries_id_order_foreign" onUpdate="CASCADE">
+      <reference local="id_order" foreign="id"/>
+    </foreign-key>
+    <index name="deliveries_id_order_foreign">
+      <index-column name="id_order"/>
+    </index>
+    <index name="deliveries_id_assigned_user_foreign">
+      <index-column name="id_assigned_user"/>
+    </index>
+    <index name="deliveries_day_delivery_foreign">
+      <index-column name="day_delivery"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="electronic_purse" idMethod="native" phpName="ElectronicPurse">
+    <column name="id" phpName="Id" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="id_client_user" phpName="IdClientUser" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="code" phpName="Code" type="VARCHAR" size="191" required="true"/>
+    <column name="amount" phpName="Amount" type="DECIMAL" size="8" scale="2" required="true"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP"/>
+    <foreign-key foreignTable="users" name="electronic_purse_id_client_user_foreign" onUpdate="CASCADE">
+      <reference local="id_client_user" foreign="id"/>
+    </foreign-key>
+    <index name="electronic_purse_id_client_user_foreign">
+      <index-column name="id_client_user"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="electronic_purse_history" idMethod="native" phpName="ElectronicPurseHistory">
+    <column name="id" phpName="Id" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="id_electronic_purse" phpName="IdElectronicPurse" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="amount" phpName="Amount" type="DECIMAL" size="8" scale="2" required="true"/>
+    <column name="movement_type" phpName="MovementType" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP"/>
+    <column name="id_order" phpName="IdOrder" type="INTEGER" size="10" sqlType="int(10) unsigned"/>
+    <column name="description" phpName="Description" type="VARCHAR" size="191" required="true"/>
+    <foreign-key foreignTable="electronic_purse" name="electronic_purse_history_id_electronic_purse_foreign" onUpdate="CASCADE">
+      <reference local="id_electronic_purse" foreign="id"/>
+    </foreign-key>
+    <foreign-key foreignTable="orders" name="electronic_purse_history_id_order_foreign" onUpdate="CASCADE">
+      <reference local="id_order" foreign="id"/>
+    </foreign-key>
+    <index name="electronic_purse_history_id_electronic_purse_foreign">
+      <index-column name="id_electronic_purse"/>
+    </index>
+    <index name="electronic_purse_history_id_order_foreign">
+      <index-column name="id_order"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="expense_concepts" idMethod="native" phpName="ExpenseConcepts">
+    <column name="id" phpName="Id" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="description" phpName="Description" type="VARCHAR" size="191" required="true"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="expense_reports" idMethod="native" phpName="ExpenseReports">
+    <column name="id" phpName="Id" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="id_branch_office" phpName="IdBranchOffice" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="id_expense_concept" phpName="IdExpenseConcept" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="id_user" phpName="IdUser" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="date_expense" phpName="DateExpense" type="DATE" required="true"/>
+    <column name="amount" phpName="Amount" type="DECIMAL" size="8" scale="2" required="true"/>
+    <column name="description" phpName="Description" type="VARCHAR" size="191" required="true"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP"/>
+    <foreign-key foreignTable="branch_offices" name="expense_reports_id_branch_office_foreign" onUpdate="CASCADE">
+      <reference local="id_branch_office" foreign="id"/>
+    </foreign-key>
+    <foreign-key foreignTable="expense_concepts" name="expense_reports_id_expense_concept_foreign" onUpdate="CASCADE">
+      <reference local="id_expense_concept" foreign="id"/>
+    </foreign-key>
+    <foreign-key foreignTable="users" name="expense_reports_id_user_foreign" onUpdate="CASCADE">
+      <reference local="id_user" foreign="id"/>
+    </foreign-key>
+    <index name="expense_reports_id_branch_office_foreign">
+      <index-column name="id_branch_office"/>
+    </index>
+    <index name="expense_reports_id_expense_concept_foreign">
+      <index-column name="id_expense_concept"/>
+    </index>
+    <index name="expense_reports_id_user_foreign">
+      <index-column name="id_user"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="groups" idMethod="native" phpName="Groups">
+    <column name="id" phpName="Id" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="name" phpName="Name" type="VARCHAR" size="191" required="true"/>
+    <column name="icon" phpName="Icon" type="VARCHAR" size="191" required="true"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="migrations" idMethod="native" phpName="Migrations">
+    <column name="id" phpName="Id" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="migration" phpName="Migration" type="VARCHAR" size="191" required="true"/>
+    <column name="batch" phpName="Batch" type="INTEGER" required="true"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="modules" idMethod="native" phpName="Modules">
+    <column name="id" phpName="Id" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="id_group" phpName="IdGroup" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="name" phpName="Name" type="VARCHAR" size="191" required="true"/>
+    <column name="url" phpName="Url" type="VARCHAR" size="191" required="true"/>
+    <column name="icon" phpName="Icon" type="VARCHAR" size="191" required="true"/>
+    <column name="active" phpName="Active" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="order" phpName="Order" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP"/>
+    <foreign-key foreignTable="groups" name="modules_id_group_foreign" onUpdate="CASCADE">
+      <reference local="id_group" foreign="id"/>
+    </foreign-key>
+    <index name="modules_id_group_foreign">
+      <index-column name="id_group"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="order_detail" idMethod="native" phpName="OrderDetail">
+    <column name="id" phpName="Id" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="id_order" phpName="IdOrder" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="id_order_detail_status" phpName="IdOrderDetailStatus" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="quantity" phpName="Quantity" type="DECIMAL" size="8" scale="2" sqlType="decimal(8,2) unsigned" required="true"/>
+    <column name="id_color" phpName="IdColor" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="id_print" phpName="IdPrint" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="id_defect" phpName="IdDefect" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="id_service" phpName="IdService" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="observations" phpName="Observations" type="VARCHAR" size="191" required="true" defaultValue=""/>
+    <column name="location" phpName="Location" type="VARCHAR" size="191" required="true" defaultValue=""/>
+    <column name="price" phpName="Price" type="DECIMAL" size="8" scale="2" required="true" defaultValue="0.00"/>
+    <column name="discount" phpName="Discount" type="DECIMAL" size="8" scale="2" required="true" defaultValue="0.00"/>
+    <column name="subtotal" phpName="Subtotal" type="DECIMAL" size="8" scale="2" required="true" defaultValue="0.00"/>
+    <column name="total" phpName="Total" type="DECIMAL" size="8" scale="2" required="true" defaultValue="0.00"/>
+    <column name="real_delivery_date" phpName="RealDeliveryDate" type="DATE"/>
+    <column name="real_delivery_time" phpName="RealDeliveryTime" type="TIME"/>
+    <column name="id_delivery_user" phpName="IdDeliveryUser" type="INTEGER" size="10" sqlType="int(10) unsigned"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP"/>
+    <foreign-key foreignTable="colors" name="order_detail_id_color_foreign" onUpdate="CASCADE">
+      <reference local="id_color" foreign="id"/>
+    </foreign-key>
+    <foreign-key foreignTable="defects" name="order_detail_id_defect_foreign" onUpdate="CASCADE">
+      <reference local="id_defect" foreign="id"/>
+    </foreign-key>
+    <foreign-key foreignTable="users" name="order_detail_id_delivery_user_foreign">
+      <reference local="id_delivery_user" foreign="id"/>
+    </foreign-key>
+    <foreign-key foreignTable="order_detail_status" name="order_detail_id_order_detail_status_foreign" onUpdate="CASCADE">
+      <reference local="id_order_detail_status" foreign="id"/>
+    </foreign-key>
+    <foreign-key foreignTable="orders" name="order_detail_id_order_foreign" onUpdate="CASCADE">
+      <reference local="id_order" foreign="id"/>
+    </foreign-key>
+    <foreign-key foreignTable="prints" name="order_detail_id_print_foreign" onUpdate="CASCADE">
+      <reference local="id_print" foreign="id"/>
+    </foreign-key>
+    <foreign-key foreignTable="services" name="order_detail_id_service_foreign" onUpdate="CASCADE">
+      <reference local="id_service" foreign="id"/>
+    </foreign-key>
+    <index name="order_detail_id_order_foreign">
+      <index-column name="id_order"/>
+    </index>
+    <index name="order_detail_id_color_foreign">
+      <index-column name="id_color"/>
+    </index>
+    <index name="order_detail_id_print_foreign">
+      <index-column name="id_print"/>
+    </index>
+    <index name="order_detail_id_defect_foreign">
+      <index-column name="id_defect"/>
+    </index>
+    <index name="order_detail_id_service_foreign">
+      <index-column name="id_service"/>
+    </index>
+    <index name="order_detail_id_order_detail_status_foreign">
+      <index-column name="id_order_detail_status"/>
+    </index>
+    <index name="order_detail_id_delivery_user_foreign">
+      <index-column name="id_delivery_user"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="order_detail_history" idMethod="native" phpName="OrderDetailHistory">
+    <column name="id" phpName="Id" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="id_order_detail" phpName="IdOrderDetail" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="id_order_detail_status" phpName="IdOrderDetailStatus" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="id_user" phpName="IdUser" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="image" phpName="Image" type="VARCHAR" size="191" required="true" defaultValue=""/>
+    <column name="description" phpName="Description" type="VARCHAR" size="191" required="true" defaultValue=""/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP"/>
+    <foreign-key foreignTable="order_detail" name="order_detail_history_id_order_detail_foreign" onUpdate="CASCADE">
+      <reference local="id_order_detail" foreign="id"/>
+    </foreign-key>
+    <foreign-key foreignTable="order_detail_status" name="order_detail_history_id_order_detail_status_foreign" onUpdate="CASCADE">
+      <reference local="id_order_detail_status" foreign="id"/>
+    </foreign-key>
+    <foreign-key foreignTable="users" name="order_detail_history_id_user_foreign" onUpdate="CASCADE">
+      <reference local="id_user" foreign="id"/>
+    </foreign-key>
+    <index name="order_detail_history_id_order_detail_foreign">
+      <index-column name="id_order_detail"/>
+    </index>
+    <index name="order_detail_history_id_order_detail_status_foreign">
+      <index-column name="id_order_detail_status"/>
+    </index>
+    <index name="order_detail_history_id_user_foreign">
+      <index-column name="id_user"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="order_detail_status" idMethod="native" phpName="OrderDetailStatus">
+    <column name="id" phpName="Id" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="description" phpName="Description" type="VARCHAR" size="191" required="true"/>
+    <column name="color" phpName="Color" type="VARCHAR" size="191" required="true"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="order_history" idMethod="native" phpName="OrderHistory">
+    <column name="id" phpName="Id" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="id_order" phpName="IdOrder" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="id_order_status" phpName="IdOrderStatus" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="amount_paid" phpName="AmountPaid" type="DECIMAL" size="8" scale="2" required="true"/>
+    <column name="total_paid" phpName="TotalPaid" type="DECIMAL" size="8" scale="2" required="true"/>
+    <column name="id_payment_method" phpName="IdPaymentMethod" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="id_payment_status" phpName="IdPaymentStatus" type="INTEGER" size="10" sqlType="int(10) unsigned"/>
+    <column name="uid" phpName="Uid" type="VARCHAR" size="191" required="true" defaultValue=""/>
+    <column name="payment_file" phpName="PaymentFile" type="VARCHAR" size="191" required="true" defaultValue=""/>
+    <column name="voucher" phpName="Voucher" type="VARCHAR" size="191" required="true" defaultValue=""/>
+    <column name="deleted_payment" phpName="DeletedPayment" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true" defaultValue="0"/>
+    <column name="id_user" phpName="IdUser" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP"/>
+    <foreign-key foreignTable="orders" name="order_history_id_order_foreign" onUpdate="CASCADE">
+      <reference local="id_order" foreign="id"/>
+    </foreign-key>
+    <foreign-key foreignTable="order_status" name="order_history_id_order_status_foreign" onUpdate="CASCADE">
+      <reference local="id_order_status" foreign="id"/>
+    </foreign-key>
+    <foreign-key foreignTable="payment_methods" name="order_history_id_payment_method_foreign" onUpdate="CASCADE">
+      <reference local="id_payment_method" foreign="id"/>
+    </foreign-key>
+    <foreign-key foreignTable="payment_status" name="order_history_id_payment_status_foreign" onUpdate="CASCADE">
+      <reference local="id_payment_status" foreign="id"/>
+    </foreign-key>
+    <foreign-key foreignTable="users" name="order_history_id_user_foreign" onUpdate="CASCADE">
+      <reference local="id_user" foreign="id"/>
+    </foreign-key>
+    <index name="order_history_id_order_foreign">
+      <index-column name="id_order"/>
+    </index>
+    <index name="order_history_id_order_status_foreign">
+      <index-column name="id_order_status"/>
+    </index>
+    <index name="order_history_id_payment_method_foreign">
+      <index-column name="id_payment_method"/>
+    </index>
+    <index name="order_history_id_user_foreign">
+      <index-column name="id_user"/>
+    </index>
+    <index name="order_history_id_payment_status_foreign">
+      <index-column name="id_payment_status"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="order_status" idMethod="native" phpName="OrderStatus">
+    <column name="id" phpName="Id" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="description" phpName="Description" type="VARCHAR" size="191" required="true"/>
+    <column name="color" phpName="Color" type="VARCHAR" size="191" required="true"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="orders" idMethod="native" phpName="Orders">
+    <column name="id" phpName="Id" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="id_branch_office" phpName="IdBranchOffice" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="folio" phpName="Folio" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="harvest_date" phpName="HarvestDate" type="VARCHAR" size="191"/>
+    <column name="harvest_time" phpName="HarvestTime" type="VARCHAR" size="191"/>
+    <column name="reception_date" phpName="ReceptionDate" type="DATE" required="true"/>
+    <column name="reception_time" phpName="ReceptionTime" type="TIME" required="true"/>
+    <column name="delivery_date" phpName="DeliveryDate" type="DATE"/>
+    <column name="home_delivery" phpName="HomeDelivery" type="DATE"/>
+    <column name="delivery_time" phpName="DeliveryTime" type="TIME"/>
+    <column name="real_delivery_date" phpName="RealDeliveryDate" type="DATE"/>
+    <column name="real_delivery_time" phpName="RealDeliveryTime" type="TIME"/>
+    <column name="id_delivery_user" phpName="IdDeliveryUser" type="INTEGER" size="10" sqlType="int(10) unsigned"/>
+    <column name="id_priority" phpName="IdPriority" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="pieces" phpName="Pieces" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true" defaultValue="0"/>
+    <column name="kilograms" phpName="Kilograms" type="DECIMAL" size="8" scale="2" required="true" defaultValue="0.00"/>
+    <column name="observations" phpName="Observations" type="VARCHAR" size="200" required="true" defaultValue=""/>
+    <column name="subtotal" phpName="Subtotal" type="DECIMAL" size="8" scale="2" required="true" defaultValue="0.00"/>
+    <column name="total" phpName="Total" type="DECIMAL" size="8" scale="2" required="true" defaultValue="0.00"/>
+    <column name="discount" phpName="Discount" type="DECIMAL" size="8" scale="2" required="true" defaultValue="0.00"/>
+    <column name="amount_paid" phpName="AmountPaid" type="DECIMAL" size="8" scale="2" required="true" defaultValue="0.00"/>
+    <column name="printed_note" phpName="PrintedNote" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true" defaultValue="0"/>
+    <column name="payment_status" phpName="PaymentStatus" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true" defaultValue="0"/>
+    <column name="id_order_status" phpName="IdOrderStatus" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="flag_home_service" phpName="FlagHomeService" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true" defaultValue="0"/>
+    <column name="id_payment_method" phpName="IdPaymentMethod" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="id_user" phpName="IdUser" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="id_client_user" phpName="IdClientUser" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="harvest_comments" phpName="HarvestComments" type="VARCHAR" size="1000" required="true" defaultValue=""/>
+    <column name="harvest_contact_name" phpName="HarvestContactName" type="VARCHAR" size="191" required="true" defaultValue=""/>
+    <column name="harvest_contact_signature" phpName="HarvestContactSignature" type="LONGVARCHAR" required="true"/>
+    <column name="harvest_photo" phpName="HarvestPhoto" type="LONGVARCHAR" required="true"/>
+    <column name="delivery_comments" phpName="DeliveryComments" type="VARCHAR" size="1000" required="true" defaultValue=""/>
+    <column name="delivery_contact_name" phpName="DeliveryContactName" type="VARCHAR" size="191" required="true" defaultValue=""/>
+    <column name="delivery_contact_signature" phpName="DeliveryContactSignature" type="LONGVARCHAR" required="true"/>
+    <column name="delivery_photo" phpName="DeliveryPhoto" type="LONGVARCHAR" required="true"/>
+    <column name="rank" phpName="Rank" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true" defaultValue="0"/>
+    <column name="qualified" phpName="Qualified" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true" defaultValue="0"/>
+    <column name="client_comments" phpName="ClientComments" type="VARCHAR" size="1000" required="true" defaultValue=""/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP"/>
+    <foreign-key foreignTable="branch_offices" name="orders_id_branch_office_foreign" onUpdate="CASCADE">
+      <reference local="id_branch_office" foreign="id"/>
+    </foreign-key>
+    <foreign-key foreignTable="users" name="orders_id_client_user_foreign" onUpdate="CASCADE">
+      <reference local="id_client_user" foreign="id"/>
+    </foreign-key>
+    <foreign-key foreignTable="users" name="orders_id_delivery_user_foreign">
+      <reference local="id_delivery_user" foreign="id"/>
+    </foreign-key>
+    <foreign-key foreignTable="order_status" name="orders_id_order_status_foreign" onUpdate="CASCADE">
+      <reference local="id_order_status" foreign="id"/>
+    </foreign-key>
+    <foreign-key foreignTable="payment_methods" name="orders_id_payment_method_foreign" onUpdate="CASCADE">
+      <reference local="id_payment_method" foreign="id"/>
+    </foreign-key>
+    <foreign-key foreignTable="priorities" name="orders_id_priority_foreign" onUpdate="CASCADE">
+      <reference local="id_priority" foreign="id"/>
+    </foreign-key>
+    <foreign-key foreignTable="users" name="orders_id_user_foreign" onUpdate="CASCADE">
+      <reference local="id_user" foreign="id"/>
+    </foreign-key>
+    <index name="orders_id_branch_office_foreign">
+      <index-column name="id_branch_office"/>
+    </index>
+    <index name="orders_id_priority_foreign">
+      <index-column name="id_priority"/>
+    </index>
+    <index name="orders_id_order_status_foreign">
+      <index-column name="id_order_status"/>
+    </index>
+    <index name="orders_id_payment_method_foreign">
+      <index-column name="id_payment_method"/>
+    </index>
+    <index name="orders_id_user_foreign">
+      <index-column name="id_user"/>
+    </index>
+    <index name="orders_id_client_user_foreign">
+      <index-column name="id_client_user"/>
+    </index>
+    <index name="orders_id_delivery_user_foreign">
+      <index-column name="id_delivery_user"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="password_resets" idMethod="native" phpName="PasswordResets">
+    <column name="email" phpName="Email" type="VARCHAR" size="191" required="true"/>
+    <column name="token" phpName="Token" type="VARCHAR" size="191" required="true"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP"/>
+    <index name="password_resets_email_index">
+      <index-column name="email"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="payment_methods" idMethod="native" phpName="PaymentMethods">
+    <column name="id" phpName="Id" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="description" phpName="Description" type="VARCHAR" size="191" required="true"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="payment_status" idMethod="native" phpName="PaymentStatus">
+    <column name="id" phpName="Id" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="description" phpName="Description" type="VARCHAR" size="191" required="true"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="pickups" idMethod="native" phpName="Pickups">
+    <column name="id" phpName="Id" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="id_order" phpName="IdOrder" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="id_assigned_user" phpName="IdAssignedUser" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="day_pickup" phpName="DayPickup" type="DATE" required="true"/>
+    <column name="time_pickup" phpName="TimePickup" type="TIME"/>
+    <column name="real_pickup_date" phpName="RealPickupDate" type="DATE"/>
+    <column name="real_pickup_time" phpName="RealPickupTime" type="DATE"/>
+    <column name="status" phpName="Status" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="comments" phpName="Comments" type="VARCHAR" size="191" required="true" defaultValue=""/>
+    <column name="harvest_comments" phpName="HarvestComments" type="VARCHAR" size="1000" required="true" defaultValue=""/>
+    <column name="harvest_contact_name" phpName="HarvestContactName" type="VARCHAR" size="191" required="true" defaultValue=""/>
+    <column name="harvest_contact_signature" phpName="HarvestContactSignature" type="LONGVARCHAR" required="true"/>
+    <column name="harvest_photo" phpName="HarvestPhoto" type="LONGVARCHAR" required="true"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP"/>
+    <foreign-key foreignTable="calendar" name="pickups_day_pickup_foreign" onUpdate="CASCADE">
+      <reference local="day_pickup" foreign="day"/>
+    </foreign-key>
+    <foreign-key foreignTable="users" name="pickups_id_assigned_user_foreign" onUpdate="CASCADE">
+      <reference local="id_assigned_user" foreign="id"/>
+    </foreign-key>
+    <foreign-key foreignTable="orders" name="pickups_id_order_foreign" onUpdate="CASCADE">
+      <reference local="id_order" foreign="id"/>
+    </foreign-key>
+    <index name="pickups_id_order_foreign">
+      <index-column name="id_order"/>
+    </index>
+    <index name="pickups_id_assigned_user_foreign">
+      <index-column name="id_assigned_user"/>
+    </index>
+    <index name="pickups_day_pickup_foreign">
+      <index-column name="day_pickup"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="prints" idMethod="native" phpName="Prints">
+    <column name="id" phpName="Id" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="description" phpName="Description" type="VARCHAR" size="191" required="true"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="priorities" idMethod="native" phpName="Priorities">
+    <column name="id" phpName="Id" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="description" phpName="Description" type="VARCHAR" size="191" required="true"/>
+    <column name="days" phpName="Days" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true" defaultValue="0"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="profile_permissions" idMethod="native" phpName="ProfilePermissions">
+    <column name="id" phpName="Id" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="id_user_type" phpName="IdUserType" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="id_module" phpName="IdModule" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP"/>
+    <foreign-key foreignTable="modules" name="profile_permissions_id_module_foreign" onUpdate="CASCADE">
+      <reference local="id_module" foreign="id"/>
+    </foreign-key>
+    <foreign-key foreignTable="user_types" name="profile_permissions_id_user_type_foreign" onUpdate="CASCADE">
+      <reference local="id_user_type" foreign="id"/>
+    </foreign-key>
+    <index name="profile_permissions_id_user_type_foreign">
+      <index-column name="id_user_type"/>
+    </index>
+    <index name="profile_permissions_id_module_foreign">
+      <index-column name="id_module"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="service_categories" idMethod="native" phpName="ServiceCategories">
+    <column name="id" phpName="Id" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="id_service_group" phpName="IdServiceGroup" type="INTEGER" size="10" sqlType="int(10) unsigned"/>
+    <column name="description" phpName="Description" type="VARCHAR" size="191" required="true"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP"/>
+    <foreign-key foreignTable="service_groups" name="service_categories_id_service_group_foreign" onUpdate="CASCADE">
+      <reference local="id_service_group" foreign="id"/>
+    </foreign-key>
+    <index name="service_categories_id_service_group_foreign">
+      <index-column name="id_service_group"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="service_groups" idMethod="native" phpName="ServiceGroups">
+    <column name="id" phpName="Id" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="description" phpName="Description" type="VARCHAR" size="191" required="true"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="services" idMethod="native" phpName="Services">
+    <column name="id" phpName="Id" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="id_service_category" phpName="IdServiceCategory" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="description" phpName="Description" type="VARCHAR" size="191" required="true"/>
+    <column name="normal_price" phpName="NormalPrice" type="DECIMAL" size="8" scale="2" required="true" defaultValue="0.00"/>
+    <column name="urgent_price" phpName="UrgentPrice" type="DECIMAL" size="8" scale="2" required="true" defaultValue="0.00"/>
+    <column name="extra_urgent_price" phpName="ExtraUrgentPrice" type="DECIMAL" size="8" scale="2" required="true" defaultValue="0.00"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP"/>
+    <foreign-key foreignTable="service_categories" name="services_id_service_category_foreign" onUpdate="CASCADE">
+      <reference local="id_service_category" foreign="id"/>
+    </foreign-key>
+    <index name="services_id_service_category_foreign">
+      <index-column name="id_service_category"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="user_types" idMethod="native" phpName="UserTypes">
+    <column name="id" phpName="Id" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="description" phpName="Description" type="VARCHAR" size="191" required="true"/>
+    <column name="flag_asigned_branch" phpName="FlagAsignedBranch" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true" defaultValue="0"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="users" idMethod="native" phpName="Users">
+    <column name="id" phpName="Id" type="INTEGER" size="10" sqlType="int(10) unsigned" primaryKey="true" autoIncrement="true" required="true"/>
+    <column name="id_user_type" phpName="IdUserType" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="name" phpName="Name" type="VARCHAR" size="191" required="true"/>
+    <column name="email" phpName="Email" type="VARCHAR" size="191" required="true"/>
+    <column name="password" phpName="Password" type="VARCHAR" size="191" required="true"/>
+    <column name="address" phpName="Address" type="VARCHAR" size="191" required="true"/>
+    <column name="suburb" phpName="Suburb" type="VARCHAR" size="191" required="true" defaultValue=""/>
+    <column name="phone" phpName="Phone" type="VARCHAR" size="191" required="true"/>
+    <column name="notes" phpName="Notes" type="VARCHAR" size="1000" required="true"/>
+    <column name="postal_code" phpName="PostalCode" type="INTEGER" size="10" sqlType="int(10) unsigned" required="true"/>
+    <column name="id_branch_office" phpName="IdBranchOffice" type="INTEGER" size="10" sqlType="int(10) unsigned"/>
+    <column name="remember_token" phpName="RememberToken" type="VARCHAR" size="100"/>
+    <column name="created_at" phpName="CreatedAt" type="TIMESTAMP"/>
+    <column name="updated_at" phpName="UpdatedAt" type="TIMESTAMP"/>
+    <foreign-key foreignTable="branch_offices" name="users_id_branch_office_foreign" onUpdate="CASCADE">
+      <reference local="id_branch_office" foreign="id"/>
+    </foreign-key>
+    <foreign-key foreignTable="user_types" name="users_id_user_type_foreign" onUpdate="CASCADE">
+      <reference local="id_user_type" foreign="id"/>
+    </foreign-key>
+    <index name="users_id_user_type_foreign">
+      <index-column name="id_user_type"/>
+    </index>
+    <index name="users_id_branch_office_foreign">
+      <index-column name="id_branch_office"/>
+    </index>
+    <unique name="users_email_unique">
+      <unique-column name="email"/>
+    </unique>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+</database>

@@ -1,0 +1,38 @@
+<?php
+$serviceContainer = \Propel\Runtime\Propel::getServiceContainer();
+$serviceContainer->initDatabaseMaps(array (
+  'golden_clean' => 
+  array (
+    0 => '\\Map\\BranchOfficeServicesTableMap',
+    1 => '\\Map\\BranchOfficesTableMap',
+    2 => '\\Map\\CalendarTableMap',
+    3 => '\\Map\\ColorsTableMap',
+    4 => '\\Map\\DefectsTableMap',
+    5 => '\\Map\\DeliveriesTableMap',
+    6 => '\\Map\\ElectronicPurseHistoryTableMap',
+    7 => '\\Map\\ElectronicPurseTableMap',
+    8 => '\\Map\\ExpenseConceptsTableMap',
+    9 => '\\Map\\ExpenseReportsTableMap',
+    10 => '\\Map\\GroupsTableMap',
+    11 => '\\Map\\MigrationsTableMap',
+    12 => '\\Map\\ModulesTableMap',
+    13 => '\\Map\\OrderDetailHistoryTableMap',
+    14 => '\\Map\\OrderDetailStatusTableMap',
+    15 => '\\Map\\OrderDetailTableMap',
+    16 => '\\Map\\OrderHistoryTableMap',
+    17 => '\\Map\\OrderStatusTableMap',
+    18 => '\\Map\\OrdersTableMap',
+    19 => '\\Map\\PasswordResetsTableMap',
+    20 => '\\Map\\PaymentMethodsTableMap',
+    21 => '\\Map\\PaymentStatusTableMap',
+    22 => '\\Map\\PickupsTableMap',
+    23 => '\\Map\\PrintsTableMap',
+    24 => '\\Map\\PrioritiesTableMap',
+    25 => '\\Map\\ProfilePermissionsTableMap',
+    26 => '\\Map\\ServiceCategoriesTableMap',
+    27 => '\\Map\\ServiceGroupsTableMap',
+    28 => '\\Map\\ServicesTableMap',
+    29 => '\\Map\\UserTypesTableMap',
+    30 => '\\Map\\UsersTableMap',
+  ),
+));
