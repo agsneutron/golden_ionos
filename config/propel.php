@@ -7,7 +7,7 @@ return [
                     'adapter' => 'mysql',
                     'dsn' => 'mysql:host=127.0.0.1;dbname=goldenti_db',
                     'user' => 'goldenti_user',
-                    'password' => 'ps6)]FZLmXya&Ctt',
+                    'password' => 'VTH7tJ5K',
                     'settings' => [
                         'charset' => 'utf8'
                     ]
