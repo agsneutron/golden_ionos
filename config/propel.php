@@ -21,8 +21,6 @@ return [
         'generator' => [
             'defaultConnection' => 'golden_clean',
             'connections' => ['golden_clean'],
-            'schemaDir' => __DIR__ . '/database',   // <-- aquí está tu schema.xml
-            'outputDir' => __DIR__ . '/generated-classes', // carpeta donde se generarán los modelos
             'dateTime' => [
                 'defaultTimeStampFormat' =>'Y-m-d H:i:s',
                 'defaultTimeFormat' => 'H:i:s',
