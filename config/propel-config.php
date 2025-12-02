@@ -23,4 +23,4 @@ $manager->setName('golden_clean');
 $serviceContainer->setConnectionManager('golden_clean',$manager);
 $serviceContainer->setDefaultDatasource('golden_clean');
 // Registrar explícitamente los TableMap
-\Propel\Runtime\Map\TableMap::addClassMap(__DIR__ . '/generated-classes/Map');
+// \Propel\Runtime\Map\TableMap::addClassMap(__DIR__ . '/generated-classes/Map');
