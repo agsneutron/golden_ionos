@@ -31,11 +31,11 @@
         "classmap": [
             "database/seeds",
             "database/factories",
-            "database",
-            "database/generated-classes/"
+            "database"
         ],
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "Map\\": "database/generated-classes/Map/"
         }
     },
     "autoload-dev": {
