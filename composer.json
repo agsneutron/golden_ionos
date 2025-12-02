@@ -35,7 +35,8 @@
         ],
         "psr-4": {
             "App\\": "app/",
-            "Map\\": "database/generated-classes/Map/"
+            "Map\\": "database/generated-classes/Map/",
+            "": "database/generated-classes/"
         }
     },
     "autoload-dev": {
