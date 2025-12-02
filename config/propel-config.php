@@ -15,12 +15,12 @@ $manager->setConfiguration(array (
     ),
   ),
   'classname' => '\\Propel\\Runtime\\Connection\\ConnectionWrapper',
-  'model_paths' =>
-  array (
-    0 => 'src',
-    1 => 'vendor',
-  ),
+  'model_paths' => [
+        __DIR__ . '/generated-classes', // <-- aquí van los modelos generados
+    ],
 ));
 $manager->setName('golden_clean');
 $serviceContainer->setConnectionManager('golden_clean',$manager);
 $serviceContainer->setDefaultDatasource('golden_clean');
+// Registrar explícitamente los TableMap
+\Propel\Runtime\Map\TableMap::addClassMap(__DIR__ . '/generated-classes/Map');
