@@ -1,4 +1,6 @@
 <?php
+use Propel\Runtime\Propel;
+use Propel\Runtime\Map\TableMap;
 $serviceContainer = \Propel\Runtime\Propel::getServiceContainer();
 $serviceContainer->checkVersion(2);
 $serviceContainer->setAdapterClass('golden_clean', 'mysql');
@@ -15,12 +17,13 @@ $manager->setConfiguration(array (
     ),
   ),
   'classname' => '\\Propel\\Runtime\\Connection\\ConnectionWrapper',
-  'model_paths' => [
-        __DIR__ . '/generated-classes', // <-- aquí van los modelos generados
-    ],
+  
 ));
 $manager->setName('golden_clean');
 $serviceContainer->setConnectionManager('golden_clean',$manager);
 $serviceContainer->setDefaultDatasource('golden_clean');
 // Registrar explícitamente los TableMap
-// \Propel\Runtime\Map\TableMap::addClassMap(__DIR__ . '/generated-classes/Map');
+$mapDir = __DIR__ . '/generated-classes/Map';
+foreach (glob($mapDir . '/*TableMap.php') as $file) {
+    require_once $file;
+}
