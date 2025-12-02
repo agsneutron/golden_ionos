@@ -24,7 +24,10 @@ define('LARAVEL_START', microtime(true));
 require __DIR__.'/../vendor/autoload.php';
 
 //setup Propel
-require_once  __DIR__.'/../config/propel-config.php';
+//require_once  __DIR__.'/../config/propel-config.php';
+
+// Cargar configuración de Propel
+require_once __DIR__ . '/../generated-conf/config.php';
 
 /*
 |--------------------------------------------------------------------------
