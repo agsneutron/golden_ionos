@@ -29,6 +29,6 @@ class DatabaseSeeder extends Seeder
         $this->call(CalendarSeeder::class);
         $this->call(ExpenseConceptsSeeder::class);
         */
-        $this->call(ClientsSeeder::class);
+        $this->call(CalendarAutoSeeder::class);
     }
 }

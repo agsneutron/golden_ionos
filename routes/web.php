@@ -231,5 +231,13 @@ Route::group(['middleware' => ['auth']], function () {
 });
 
 Route::get('logs', '\Rap2hpoutre\LaravelLogViewer\LogViewerController@index');
+Route::get('/run-calendar-seeder', function () {
+
+    require_once base_path('database/seeds/CalendarAutoSeeder.php');
+
+    (new CalendarAutoSeeder)->run();
+
+    return 'Seeder ejecutado correctamente';
+});
 
    

@@ -7,6 +7,7 @@ class CalendarAutoSeeder extends Seeder
 {
     public function run(): void
     {
+        Carbon::setLocale('es');
         $start = Carbon::create(2026, 1, 1);
         $end   = Carbon::create(2026, 12, 31);
 
