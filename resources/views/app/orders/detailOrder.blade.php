@@ -457,7 +457,14 @@
                         <select name='IdOrderDetailStatus' id='IdOrderDetailStatus' class='form-control'>
                             <option value="0">Selecciona...</option>
                             @foreach($status as $stat)
-                                <option value="{{ $stat['Id'] }}">{{ $stat['Description'] }}</option>
+                                @if($stat['Id'] == 1)
+                                    @if($order['IdOrderStatus'] != 5 )
+                                        <option value="{{ $stat['Id'] }}">{{ $order['IdOrderStatus'] }}</option>
+                                    @endif
+                                @else
+                                    <option value="{{ $stat['Id'] }}">{{ $stat['Description'] }}</option>
+                                @endif
+
                             @endforeach
                         </select>
                     </div>
@@ -506,8 +513,15 @@
                         <label>Descripción: <span class='text-danger'>(*)</span></label>
                         <select name='IdStatusDetails' id='IdStatusDetails' class='form-control'>
                             <option value="0">Selecciona...</option>
-                            @foreach($status as $stat)
-                                <option value="{{ $stat['Id'] }}">{{ $stat['Description'] }}</option>
+                           @foreach($status as $stat)
+                                @if($stat['Id'] == 1)
+                                    @if($order['IdOrderStatus'] != 5 )
+                                        <option value="{{ $stat['Id'] }}">{{ $order['IdOrderStatus'] }}</option>
+                                    @endif
+                                @else
+                                    <option value="{{ $stat['Id'] }}">{{ $stat['Description'] }}</option>
+                                @endif
+
                             @endforeach
                         </select>
                     </div>
@@ -624,6 +638,7 @@
         $('.chosen-select').chosen({width: "100%"});
         loadTableDetailOrder();
         loadTablePaymentsOrder();
+       
 
         $("#inputObservationsOrder").hide();
 
