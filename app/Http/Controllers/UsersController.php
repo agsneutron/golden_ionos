@@ -66,9 +66,29 @@ class UsersController extends Controller
             ->withColumn('Password','ConfPassword')
             ->findOneById($cve);
 
+        $idUserType = $user->getIdUserType();
+
+        // Validar si existen permisos para módulo 18
+        $hasProfilePermissions = \ProfilePermissionsQuery::create()
+            ->filterByIdModule(18)
+            ->filterByIdUserType($idUserType)
+            ->exists();
+
+        // Obtener flag_asigned_branch
+        $userType = \UserTypesQuery::create()
+            ->findOneById($idUserType);
+
+        $flagAssignedBranch = false;
+
+        if ($userType) {
+            $flagAssignedBranch = $userType->getFlagAsignedBranch() == 1;
+        }
+
         return json_encode(array(
             'success' => true,
-            'data' => $user->toArray()
+            'data' => $user->toArray(),
+            'hasProfilePermissions' => $hasProfilePermissions,
+            'flagAssignedBranch' => $flagAssignedBranch
         ));
     }
 
@@ -303,5 +323,20 @@ class UsersController extends Controller
                 "errorMsg" => "Las contraseñas no coinciden"
             ));
         }
+    }
+
+    public function checkProfilePermissions(Request $request)
+    {
+        $idUserType = $request->get('id_user_type');
+
+        $exists = \ProfilePermissionsQuery::create()
+            ->filterByIdModule(18)
+            ->filterByIdUserType($idUserType)
+            ->exists(); 
+
+        return json_encode([
+            'success' => true,
+            'hasRecords' => $exists
+        ]);
     }
 }

@@ -121,11 +121,50 @@
         });
 
         function printDailyCut(){
-            @if(Auth::user()->id_branch_office != null)
-                var filterBranchOffice = '{{ Auth::user()->id_branch_office }}';
-            @else
-                var filterBranchOffice = $("#filterBranchOffice").find(":selected").val();
-            @endif
+
+            var userBranchOffice = @json(Auth::user()->id_branch_office);
+            var userId = @json(Auth::user()->id);
+            var selectedBranchOffice = $("#filterBranchOffice").find(":selected").val();
+
+            //@if(Auth::user()->id_branch_office != null)
+            //    var filterBranchOffice = '{{ Auth::user()->id_branch_office }}';
+            //@else
+            //    var filterBranchOffice = $("#filterBranchOffice").find(":selected").val();
+            //@endif
+
+            if (userBranchOffice !== null) {
+                if(selectedBranchOffice != undefined){
+                    if (userBranchOffice != selectedBranchOffice) {
+                        filterBranchOffice = userBranchOffice;
+                        swal({
+                            title: 'Acceso denegado',
+                            text: 'No tiene permiso para imprimir el corte de esta sucursal.',
+                            type: 'warning',
+                            confirmButtonText: 'Aceptar'
+                        });
+
+                        return;
+                    }
+                }else{
+                    filterBranchOffice = userBranchOffice;
+                }
+
+            }else{
+                if (userId ==3) {
+                     filterBranchOffice = userBranchOffice;
+                }else{
+                    swal({
+                        title: 'Acceso denegado',
+                        text: 'No tiene permiso para imprimir el corte de esta sucursal.',
+                        type: 'warning',
+                        confirmButtonText: 'Aceptar'
+                    });
+                    return;
+                }
+            }
+
+
+
             day = $("#filterDay").val();
             url = "{{ route('daily_cut.printDailyCut', array(':branch',':day'))  }}";
             url = url.replace(':branch', filterBranchOffice);
@@ -138,11 +177,51 @@
 
         function viewDailyCut(){
 
-            @if(Auth::user()->id_branch_office != null)
-                var filterBranchOffice = '{{ Auth::user()->id_branch_office }}';
-            @else
-                var filterBranchOffice = $("#filterBranchOffice").find(":selected").val();
-            @endif
+            var userBranchOffice = @json(Auth::user()->id_branch_office);
+            var userId = @json(Auth::user()->id);
+            var selectedBranchOffice = $("#filterBranchOffice").find(":selected").val();
+            console.log("userBranchOffice" , userBranchOffice);
+            console.log("selectedBranchOffice", selectedBranchOffice);
+
+            //@if(Auth::user()->id_branch_office != null)
+            //    var filterBranchOffice = '{{ Auth::user()->id_branch_office }}';
+            //@else
+            //    var filterBranchOffice = $("#filterBranchOffice").find(":selected").val();
+            //@endif
+
+            if (userBranchOffice !== null) {
+                if(selectedBranchOffice != undefined){
+                    if (userBranchOffice != selectedBranchOffice) {
+                        filterBranchOffice = userBranchOffice;
+                        swal({
+                            title: 'Acceso denegado',
+                            text: 'No tiene permiso para visualizar el corte de esta sucursal.',
+                            type: 'warning',
+                            confirmButtonText: 'Aceptar'
+                        });
+
+                        return;
+                    }
+                }else{
+                    filterBranchOffice = userBranchOffice;
+                }
+                
+
+            }else{
+                if (userId ==3) {
+                    filterBranchOffice = $("#filterBranchOffice").find(":selected").val();
+                }else{
+                     swal({
+                        title: 'Acceso denegado',
+                        text: 'No tiene permiso para visualizar el corte de esta sucursal.',
+                        type: 'warning',
+                        confirmButtonText: 'Aceptar'
+                    });
+                    return;
+                }
+                   
+            }
+
             $('#divTableCash').load('{{ route('daily_cut.tableCash') }}',
                 {
                     _token: '{{ csrf_token() }}',

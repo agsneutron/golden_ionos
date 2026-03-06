@@ -240,4 +240,8 @@ Route::get('/run-calendar-seeder', function () {
     return 'Seeder ejecutado correctamente';
 });
 
+Route::get('/check-profile-permissions', [
+    'as'   => 'users.checkProfilePermissions',
+    'uses' => 'UsersController@checkProfilePermissions'
+]);
    

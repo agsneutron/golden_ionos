@@ -49,7 +49,7 @@
                             </select>
                         </div>
                         <div class="form-group" id="divInputSucursal">
-                            <label>Sucursal asignada: <span class='text-danger'>(*)</span></label>
+                            <label id="lblSucursal">Sucursal asignada: <span class='text-danger'>(*)</span></label>
                             <select name="IdBranchOffice" id="IdBranchOffice" class="form-control">
                                 <option value="0">Seleccione...</option>
                                 @foreach($branches as $branch)
@@ -136,18 +136,44 @@
             $('.chosen-select').chosen({width: "100%"});
             $("#divInputSucursal").hide();
             loadTableUsers();
-
+           
             $("#IdUserType").change(function(){
-                if(parseInt($("#IdUserType").find(":selected").val()) != 00 ){
+                var seMuestra = 0;
+                let idUserType = parseInt($("#IdUserType").find(":selected").val());
+                if (idUserType == 00) return;
+
+                if(idUserType != 00 ){
                     flag = $("#IdUserType").find(":selected").data("flagbranch");
                     if(parseInt(flag) == 1){
                         $("#divInputSucursal").show();
+                        seMuestra=1;
                     }else{
                         $("#divInputSucursal").hide();
                     }
                 }else{
                     $("#divInputSucursal").hide();
                 }
+
+                if (seMuestra == 0){
+                    $.get('{{ route('users.checkProfilePermissions') }}',
+                        {
+                            id_user_type: idUserType
+                        },
+                        function (result) {
+
+                            if (result.hasRecords) {
+                                console.log('TRUE - Existen registros');
+                                $("#divInputSucursal").show();
+                            } else {
+                                console.log('FALSE - No existen registros');
+                                $("#divInputSucursal").hide();
+                            }
+
+                        },
+                        'json'
+                    );
+                }
+                
 
             });
 
@@ -181,6 +207,18 @@
                     cve: cve
                 }, function (result) {
                     $('#frmUsuario').form('load', result.data);
+                    console.log("hasProfilePermissions",result.hasProfilePermissions);
+                    if (result.hasProfilePermissions || result.flagAssignedBranch){
+                        $("#divInputSucursal").show();
+                        if (result.hasProfilePermissions ){
+                            $("#lblSucursal").html("Sucursal asignada para corte: <span class='text-danger'>(*)</span>");
+                        }else{
+                            $("#lblSucursal").html("Sucursal asignada: <span class='text-danger'>(*)</span>");
+                        }   
+                    }else{
+                        $("#divInputSucursal").hide();
+                    }
+                    
                 }, 'json').always(function (result) {
                 $('#modalUsuario').modal('show');
             });
