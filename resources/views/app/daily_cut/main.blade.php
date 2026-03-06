@@ -150,7 +150,7 @@
                 }
 
             }else{
-                if (userId ==3) {
+                if (userId ==3 || userId ==3214) {
                      filterBranchOffice = userBranchOffice;
                 }else{
                     swal({
@@ -208,7 +208,7 @@
                 
 
             }else{
-                if (userId ==3) {
+                if (userId ==3 || userId ==3214) {
                     filterBranchOffice = $("#filterBranchOffice").find(":selected").val();
                 }else{
                      swal({
