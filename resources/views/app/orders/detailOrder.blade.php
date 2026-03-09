@@ -459,7 +459,7 @@
                             @foreach($status as $stat)
                                 @if($stat['Id'] == 1)
                                     @if($order['IdOrderStatus'] != 5 )
-                                        <option value="{{ $stat['Id'] }}">{{ $order['IdOrderStatus'] }}</option>
+                                        <option value="{{ $stat['Id'] }}">{{ $stat['Description'] }}</option>
                                     @endif
                                 @else
                                     <option value="{{ $stat['Id'] }}">{{ $stat['Description'] }}</option>
