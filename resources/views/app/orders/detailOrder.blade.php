@@ -457,11 +457,7 @@
                         <select name='IdOrderDetailStatus' id='IdOrderDetailStatus' class='form-control'>
                             <option value="0">Selecciona...</option>
                             @foreach($status as $stat)
-                                @if($stat['Id'] == 1)
-                                    @if($order['IdOrderStatus'] != 5 )
-                                        <option value="{{ $stat['Id'] }}">{{ $stat['Description'] }}</option>
-                                    @endif
-                                @else
+                                @if($stat['Id'] != 1)
                                     <option value="{{ $stat['Id'] }}">{{ $stat['Description'] }}</option>
                                 @endif
 
@@ -514,11 +510,7 @@
                         <select name='IdStatusDetails' id='IdStatusDetails' class='form-control'>
                             <option value="0">Selecciona...</option>
                            @foreach($status as $stat)
-                                @if($stat['Id'] == 1)
-                                    @if($order['IdOrderStatus'] != 5 )
-                                        <option value="{{ $stat['Id'] }}">{{ $stat['Description'] }}</option>
-                                    @endif
-                                @else
+                                @if($stat['Id'] != 1)
                                     <option value="{{ $stat['Id'] }}">{{ $stat['Description'] }}</option>
                                 @endif
 

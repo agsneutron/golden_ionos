@@ -172,7 +172,7 @@
                             </button>
                         </div>
                         <div class='col-lg-3'>
-                            @if(Auth::user()->id_branch_office == null)
+                            @if($flag_asigned_branch == 0)
                             <div class="form-group" >
                                 <label>Sucursal:</label>
                                 <select name="filterBranchOffice" id="filterBranchOffice" class="form-control">
