@@ -334,9 +334,20 @@ class UsersController extends Controller
             ->filterByIdUserType($idUserType)
             ->exists(); 
 
+        // Obtener flag_asigned_branch
+        $userType = \UserTypesQuery::create()
+            ->findOneById($idUserType);
+
+        $flagAssignedBranch = false;
+
+        if ($userType) {
+            $flagAssignedBranch = $userType->getFlagAsignedBranch() == 1;
+        }
+
         return json_encode([
             'success' => true,
-            'hasRecords' => $exists
+            'hasRecords' => $exists,
+            'flagAssignedBranch' => $flagAssignedBranch
         ]);
     }
 }

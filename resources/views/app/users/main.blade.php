@@ -145,6 +145,7 @@
                 if(idUserType != 00 ){
                     flag = $("#IdUserType").find(":selected").data("flagbranch");
                     if(parseInt(flag) == 1){
+                        $("#lblSucursal").html("Sucursal asignada: <span class='text-danger'>(*)</span>");
                         $("#divInputSucursal").show();
                         seMuestra=1;
                     }else{
@@ -160,10 +161,17 @@
                             id_user_type: idUserType
                         },
                         function (result) {
-
                             if (result.hasRecords) {
                                 console.log('TRUE - Existen registros');
+                                
+                                if (result.flagAssignedBranch==false){
+                                     $("#lblSucursal").html("Sucursal asignada para corte: <span class='text-danger'>(*)</span>");
+                                }else{
+                                     $("#lblSucursal").html("Sucursal asignada: <span class='text-danger'>(*)</span>");
+                                }
+                               
                                 $("#divInputSucursal").show();
+
                             } else {
                                 console.log('FALSE - No existen registros');
                                 $("#divInputSucursal").hide();
@@ -194,6 +202,7 @@
             $('#id').val(0);
             $('#inputPassword').show();
             $('#modalUsuario').modal('show');
+            $("#divInputSucursal").hide();
         }
 
         function editUser(cve,e){
