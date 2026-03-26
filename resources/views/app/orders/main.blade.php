@@ -265,7 +265,7 @@
                         <div class="row">
                             <div class="col-lg-5">
                                 <input type='hidden' id='Id' name='Id' value="0">
-                                @if(Auth::user()->id_branch_office != null)
+                                @if(Auth::user()->id_branch_office != null && $flag_asigned_branch != 0)
                                     <input type='hidden' id='IdBranchOffice' name='IdBranchOffice' value="0">
                                 @else
                                     <div class="form-group" >
@@ -517,7 +517,8 @@
     <div class='row' id="detailOrder"></div>
 
     <script>
-        @if(Auth::user()->id_branch_office != null)
+        filterBranchOffice=0;
+        @if(Auth::user()->id_branch_office != null && $flag_asigned_branch != 0)
             filterBranchOffice = parseInt('{{ Auth::user()->id_branch_office }}');
         @endif
 
@@ -566,7 +567,7 @@
                 $("#totalCambio").html("$ " +cambio);
             });
 
-            @if(Auth::user()->id_branch_office != null)
+            @if(Auth::user()->id_branch_office != null && $flag_asigned_branch != 0)
                 searchOrders();
             @endif
 
@@ -671,7 +672,7 @@
             $("#divClientData").hide();
         }
 
-        @if(Auth::user()->id_branch_office == null)
+        @if($flag_asigned_branch == 0 ) //Auth::user()->id_branch_office == null
         function searchOrders(){
             $('#divTableOrders').load("{{ route('orders.searchOrders') }}",
                 {
@@ -805,7 +806,7 @@
         }
 
         function saveOrder(){
-            @if(Auth::user()->id_branch_office != null)
+            @if(Auth::user()->id_branch_office != null && $flag_asigned_branch != 0)
                 $("#IdBranchOffice").val(filterBranchOffice);
             @endif
 

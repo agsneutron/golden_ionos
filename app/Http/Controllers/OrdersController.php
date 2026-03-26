@@ -129,7 +129,7 @@ class OrdersController extends Controller
 
         // con $flag_asigned_branch validamos que el tipo de usuario tenga o no tenga asignada sucursal
 
-        if($filterBranchOffice != 0 && $flag_asigned_branch!=0){
+        if($filterBranchOffice != 0){
             $orders->filterByIdBranchOffice($filterBranchOffice);
         }
 

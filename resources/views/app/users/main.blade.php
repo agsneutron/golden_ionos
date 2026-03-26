@@ -210,7 +210,7 @@
                     console.log("hasProfilePermissions",result.hasProfilePermissions);
                     if (result.hasProfilePermissions || result.flagAssignedBranch){
                         $("#divInputSucursal").show();
-                        if (result.hasProfilePermissions ){
+                        if (result.hasProfilePermissions && !result.flagAssignedBranch){
                             $("#lblSucursal").html("Sucursal asignada para corte: <span class='text-danger'>(*)</span>");
                         }else{
                             $("#lblSucursal").html("Sucursal asignada: <span class='text-danger'>(*)</span>");
