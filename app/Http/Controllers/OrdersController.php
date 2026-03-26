@@ -68,6 +68,12 @@ class OrdersController extends Controller
             ->filterByIdUserType(5)
             ->find();
 
+        $user = Auth::user();
+
+        $flag = DB::table('user_types')
+            ->where('id', $user->id_user_type)
+            ->value('flag_asigned_branch') ?? 0;
+
         return view('app.orders.main')
             ->with('status', $status->toArray())
             ->with('branches', $branches->toArray())
@@ -75,6 +81,7 @@ class OrdersController extends Controller
             ->with('clients', $clients->toArray())
             ->with('priorities', $priorities->toArray())
             ->with('paymentMethods', $paymentMethods->toArray())
+            ->with('flag_asigned_branch', $flag)  
             ->with('modules', $this->getAllowedModules($this->viewName));
     }
 
@@ -83,6 +90,18 @@ class OrdersController extends Controller
         $filterStatus = $request->get('filterStatus');
         $filterStartDay = $request->get('filterStartDay');
         $filterEndDay = $request->get('filterEndDay');
+        $flag_asigned_branch = 0;
+
+        // Obtén el usuario autenticado
+        $user = Auth::user();
+
+        // Verifica si el usuario está autenticado
+        if ($user) {
+            // Obtén el flag_asigned_branch del user_type relacionado
+            $flag_asigned_branch = DB::table('user_types')
+                    ->where('id', $user->id_user_type)
+                    ->value('flag_asigned_branch');
+        }
 
         $orders = \OrdersQuery::create()
             ->useBranchOfficesQuery('Branch')
@@ -108,7 +127,9 @@ class OrdersController extends Controller
             ->orderByReceptionDate('DESC')
             ->orderByReceptionTime('DESC');
 
-        if($filterBranchOffice != 0){
+        // con $flag_asigned_branch validamos que el tipo de usuario tenga o no tenga asignada sucursal
+
+        if($filterBranchOffice != 0 && $flag_asigned_branch!=0){
             $orders->filterByIdBranchOffice($filterBranchOffice);
         }
 
@@ -1170,7 +1191,7 @@ class OrdersController extends Controller
             $IdDetailToUpdate = $request->get('IdDetailToUpdate');
             $IdOrderDetailStatus = $request->get('IdOrderDetailStatus');
             $DescriptionStatus = $request->get('DescriptionStatus');
-            $Location = $request->get('Location',"");
+            $Location = ""; // $request->get('Location',"");
 
             $detail = \OrderDetailQuery::create()
                 ->findOneById($IdDetailToUpdate);
